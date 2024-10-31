@@ -2,7 +2,12 @@ package event
 
 import "github.com/qiaogy91/ioc/utils"
 
-func ErrEventValidate(s error) *utils.ApiException { return utils.NewApiException(10000, s.Error()) }
-func ErrEventCreate(s error) *utils.ApiException   { return utils.NewApiException(10001, s.Error()) }
-func ErrQueryEvent(s error) *utils.ApiException    { return utils.NewApiException(10002, s.Error()) }
-func ErrApiQueryReq(s error) *utils.ApiException   { return utils.NewApiException(10003, s.Error()) }
+func ErrEventValidate(e error) *utils.ApiException {
+	return utils.NewApiException(10011, "Event 参数校验错误", e)
+}
+func ErrEventCreate(e error) *utils.ApiException {
+	return utils.NewApiException(10011, "Event 创建错误", e)
+}
+func ErrQueryEvent(e error) *utils.ApiException {
+	return utils.NewApiException(10011, "Event 查询错误", e)
+}

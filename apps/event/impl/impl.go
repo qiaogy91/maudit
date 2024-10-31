@@ -13,7 +13,7 @@ var _ event.Service = &Impl{}
 
 type Impl struct {
 	ioc.ObjectImpl
-	event.UnimplementedServiceServer
+	event.UnimplementedRpcServer
 	log *slog.Logger
 	db  *gorm.DB
 }
