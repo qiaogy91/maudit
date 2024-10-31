@@ -5,22 +5,24 @@ package maudit.event;
 option go_package = "github.com/qiaogy91/maudit/apps/event";
 
 message Event {
+    // @gotags: json:"created_at" gorm:"primaryKey"
+    int64 id = 1;
     // @gotags: validate:"required"
-    int64 time = 1;
+    int64 time = 2;
     // @gotags: validate:"required"
-    string user = 2;
+    string user = 3;
     // @gotags: validate:"required"
-    string source = 3;
+    string source = 4;
     // @gotags: validate:"required"
-    string agent = 4;
+    string agent = 5;
     // @gotags: validate:"required"
-    string service = 5;
+    string service = 6;
     // @gotags: validate:"required"
-    string resource = 6;
+    string resource = 7;
     // @gotags: validate:"required"
-    string action = 7;
+    string action = 8;
     // @gotags: validate:"required"
-    int64 response_code = 8;
+    int64 response_code = 9;
 }
 
 message EventSet {
