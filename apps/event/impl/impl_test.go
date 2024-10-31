@@ -61,7 +61,7 @@ func TestImpl_QueryEvent(t *testing.T) {
 		PageNum:   4,
 		PageSize:  20,
 		QueryType: event.QUERY_TYPE_QUERY_TYPE_SERVICE,
-		Keyword:   "svc01",
+		Keyword:   "service01",
 	}
 
 	inst, err := c.QueryEvent(ctx, req)

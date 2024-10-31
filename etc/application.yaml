@@ -4,12 +4,12 @@ application:
   domain: "example.com"
 
 log:
-  trace: true
+  otlp: true
 
 http:
   host: "0.0.0.0"
   port: 8081
-  trace: true
+  otlp: true
 
 grpc:
   host: "0.0.0.0"

@@ -31,7 +31,7 @@ func TestImpl_Syncer(t *testing.T) {
 		User:         "qiaogy",
 		Source:       "10.0.0.1",
 		Agent:        "chrome",
-		Service:      "myService",
+		Service:      "service01",
 		Resource:     "SLB",
 		Action:       "create",
 		ResponseCode: 200,
