@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package maudit.event;
+
+import "apps/event/pb/model.proto";
+
+option go_package = "github.com/qiaogy91/maudit/apps/event";
+
+service Service {
+    rpc CreateEvent (Event) returns (Event);
+    rpc QueryEvent (QueryEventRequest) returns (EventSet);
+}
+
+enum QUERY_TYPE {
+    QUERY_TYPE_UNSPECIFIED = 0;
+    QUERY_TYPE_USERNAME = 1;
+    QUERY_TYPE_SERVICE = 2;
+
+}
+message QueryEventRequest {
+    // @gotags: validate:"required" schema:"pageNum"
+    int64 page_num = 1;
+    // @gotags: validate:"required" schema:"pageSize"
+    int64 page_size = 2;
+    // @gotags: validate:"required" schema:"queryType"
+    QUERY_TYPE query_type = 3;
+    // @gotags: validate:"required" schema:"keyword"
+    string keyword = 4;
+}

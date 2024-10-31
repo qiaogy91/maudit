@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package maudit.event;
+
+option go_package = "github.com/qiaogy91/maudit/apps/event";
+
+message Event {
+    // @gotags: validate:"required"
+    int64 time = 1;
+    // @gotags: validate:"required"
+    string user = 2;
+    // @gotags: validate:"required"
+    string source = 3;
+    // @gotags: validate:"required"
+    string agent = 4;
+    // @gotags: validate:"required"
+    string service = 5;
+    // @gotags: validate:"required"
+    string resource = 6;
+    // @gotags: validate:"required"
+    string action = 7;
+    // @gotags: validate:"required"
+    int64 response_code = 8;
+}
+
+message EventSet {
+    int64 total = 1;
+    repeated Event items = 2;
+}
+
