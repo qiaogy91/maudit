@@ -10,6 +10,6 @@ const AppName = "event"
 func Get() Service { return ioc.Controller().Get(AppName).(Service) }
 
 type Service interface {
-	ServiceServer
+	RpcServer
 	CreateTable(ctx context.Context) error
 }

@@ -19,126 +19,126 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Service_CreateEvent_FullMethodName = "/maudit.event.Service/CreateEvent"
-	Service_QueryEvent_FullMethodName  = "/maudit.event.Service/QueryEvent"
+	Rpc_CreateEvent_FullMethodName = "/maudit.event.Rpc/CreateEvent"
+	Rpc_QueryEvent_FullMethodName  = "/maudit.event.Rpc/QueryEvent"
 )
 
-// ServiceClient is the client API for Service service.
+// RpcClient is the client API for Rpc service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type ServiceClient interface {
+type RpcClient interface {
 	CreateEvent(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
 	QueryEvent(ctx context.Context, in *QueryEventRequest, opts ...grpc.CallOption) (*EventSet, error)
 }
 
-type serviceClient struct {
+type rpcClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewServiceClient(cc grpc.ClientConnInterface) ServiceClient {
-	return &serviceClient{cc}
+func NewRpcClient(cc grpc.ClientConnInterface) RpcClient {
+	return &rpcClient{cc}
 }
 
-func (c *serviceClient) CreateEvent(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error) {
+func (c *rpcClient) CreateEvent(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error) {
 	out := new(Event)
-	err := c.cc.Invoke(ctx, Service_CreateEvent_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Rpc_CreateEvent_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *serviceClient) QueryEvent(ctx context.Context, in *QueryEventRequest, opts ...grpc.CallOption) (*EventSet, error) {
+func (c *rpcClient) QueryEvent(ctx context.Context, in *QueryEventRequest, opts ...grpc.CallOption) (*EventSet, error) {
 	out := new(EventSet)
-	err := c.cc.Invoke(ctx, Service_QueryEvent_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Rpc_QueryEvent_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// ServiceServer is the server API for Service service.
-// All implementations must embed UnimplementedServiceServer
+// RpcServer is the server API for Rpc service.
+// All implementations must embed UnimplementedRpcServer
 // for forward compatibility
-type ServiceServer interface {
+type RpcServer interface {
 	CreateEvent(context.Context, *Event) (*Event, error)
 	QueryEvent(context.Context, *QueryEventRequest) (*EventSet, error)
-	mustEmbedUnimplementedServiceServer()
+	mustEmbedUnimplementedRpcServer()
 }
 
-// UnimplementedServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedServiceServer struct {
+// UnimplementedRpcServer must be embedded to have forward compatible implementations.
+type UnimplementedRpcServer struct {
 }
 
-func (UnimplementedServiceServer) CreateEvent(context.Context, *Event) (*Event, error) {
+func (UnimplementedRpcServer) CreateEvent(context.Context, *Event) (*Event, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateEvent not implemented")
 }
-func (UnimplementedServiceServer) QueryEvent(context.Context, *QueryEventRequest) (*EventSet, error) {
+func (UnimplementedRpcServer) QueryEvent(context.Context, *QueryEventRequest) (*EventSet, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryEvent not implemented")
 }
-func (UnimplementedServiceServer) mustEmbedUnimplementedServiceServer() {}
+func (UnimplementedRpcServer) mustEmbedUnimplementedRpcServer() {}
 
-// UnsafeServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to ServiceServer will
+// UnsafeRpcServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to RpcServer will
 // result in compilation errors.
-type UnsafeServiceServer interface {
-	mustEmbedUnimplementedServiceServer()
+type UnsafeRpcServer interface {
+	mustEmbedUnimplementedRpcServer()
 }
 
-func RegisterServiceServer(s grpc.ServiceRegistrar, srv ServiceServer) {
-	s.RegisterService(&Service_ServiceDesc, srv)
+func RegisterRpcServer(s grpc.ServiceRegistrar, srv RpcServer) {
+	s.RegisterService(&Rpc_ServiceDesc, srv)
 }
 
-func _Service_CreateEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Rpc_CreateEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(Event)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceServer).CreateEvent(ctx, in)
+		return srv.(RpcServer).CreateEvent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Service_CreateEvent_FullMethodName,
+		FullMethod: Rpc_CreateEvent_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).CreateEvent(ctx, req.(*Event))
+		return srv.(RpcServer).CreateEvent(ctx, req.(*Event))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Service_QueryEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Rpc_QueryEvent_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(QueryEventRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServiceServer).QueryEvent(ctx, in)
+		return srv.(RpcServer).QueryEvent(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Service_QueryEvent_FullMethodName,
+		FullMethod: Rpc_QueryEvent_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServiceServer).QueryEvent(ctx, req.(*QueryEventRequest))
+		return srv.(RpcServer).QueryEvent(ctx, req.(*QueryEventRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Service_ServiceDesc is the grpc.ServiceDesc for Service service.
+// Rpc_ServiceDesc is the grpc.ServiceDesc for Rpc service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Service_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "maudit.event.Service",
-	HandlerType: (*ServiceServer)(nil),
+var Rpc_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "maudit.event.Rpc",
+	HandlerType: (*RpcServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "CreateEvent",
-			Handler:    _Service_CreateEvent_Handler,
+			Handler:    _Rpc_CreateEvent_Handler,
 		},
 		{
 			MethodName: "QueryEvent",
-			Handler:    _Service_QueryEvent_Handler,
+			Handler:    _Rpc_QueryEvent_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
