@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/emicklei/go-restful/v3"
 	"github.com/qiaogy91/maudit/apps/event"
+	"github.com/qiaogy91/mcenter/apps/token"
 	"github.com/segmentio/kafka-go"
 	"log/slog"
 	"strings"
@@ -13,7 +14,7 @@ import (
 
 func (i *Impl) Filter() restful.FilterFunction {
 	return func(r *restful.Request, w *restful.Response, chain *restful.FilterChain) {
-
+		fmt.Printf("我是审计中间件\n")
 		// 获取访问到的路由（返回值为nil 表示没有匹配到已经注册的路由）
 		sr := r.SelectedRoute()
 		if sr == nil {
@@ -30,9 +31,10 @@ func (i *Impl) Filter() restful.FilterFunction {
 					location = "Unknown"
 				}
 
+				tk := r.Attribute("token").(*token.Token)
 				msg := &event.Event{
 					Time:         time.Now().Unix(),
-					User:         "qiaogy",
+					User:         tk.Username,
 					Source:       r.Request.RemoteAddr,
 					Location:     location,
 					Agent:        r.Request.UserAgent(),

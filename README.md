@@ -9,6 +9,11 @@
 - Maudit 中的 Consumer 消费 Kafka 中的数据，并写入到 Mysql 数据库中
 - 用户可通过 Maudit 提供的 API 查询审计数据
 
+### 优先级问题
+> 如果与 Auth 认证中间件开启的话，要通过优先级来调整顺序，确保请求先经过Auth、再经过Audit
+> 否则Audit 中获取不到用户信息
+- kafka：优先级 default/203，由 `ioc/default/kafka` 提供，是maudit Producer 的基础依赖
+- producer：优先级 default/204，由 `maudit/provider/producer` 提供，给其他微服务使用
 
 ### 使用方式
 - 配置说明

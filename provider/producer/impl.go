@@ -23,7 +23,7 @@ type Impl struct {
 }
 
 func (i *Impl) Name() string  { return AppName }
-func (i *Impl) Priority() int { return 202 }
+func (i *Impl) Priority() int { return 204 }
 
 func (i *Impl) Init() {
 	i.svc = iockafka.GetClient().Producer(i.Topic)
