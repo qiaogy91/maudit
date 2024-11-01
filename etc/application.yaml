@@ -7,11 +7,13 @@ log:
   otlp: true
 
 http:
+  enabled: true
   host: "0.0.0.0"
   port: 8081
   otlp: true
 
 grpc:
+  enabled: true
   host: "0.0.0.0"
   port: 18081
 
@@ -36,6 +38,6 @@ datasource:
   password: "redhat"
   debug: true
 
-consumer:
+mauditConsumer:
   topic: "maudit"
   duration: 5

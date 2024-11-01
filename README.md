@@ -11,6 +11,38 @@
 
 
 ### 使用方式
+- 配置说明
+```yaml
+# kafka 服务器地址、账号信息
+kafka:
+  username: "adminscram"
+  password: "admin-secret-512"
+  brokers: ["127.0.0.1:9093"]
+  async: true
+  batchTimeout: 10
+# 审计中间件作为消费者，向Kafka 写入消息
+mauditProducer:
+  topic: "maudit"
+```
+- 加载审计中间件
 ```go
-import _ "github.com/qiaogy91/maudit/client"
+import (
+    _ "github.com/qiaogy91/maudit/provider/producer"
+)
+```
+- 指定资源元数据
+```go
+func (h *Handler) Registry() {
+    tag := []string{"凭证管理"}
+    
+    ws := gorestful.ModuleWebservice(h)
+    ws.Route(ws.GET("/").To(h.Test).
+    Doc("测试接口").
+    Metadata(restfulspec.KeyOpenAPITags, tag).
+    Metadata("auth", false).
+    Metadata("audit", true).
+    Metadata("resource", secret.AppName).
+    Metadata("action", "get"),
+    )
+}
 ```

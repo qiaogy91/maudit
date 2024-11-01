@@ -10,7 +10,7 @@ import (
 	"log/slog"
 )
 
-const AppName = "consumer"
+const AppName = "mauditConsumer"
 
 type Impl struct {
 	ioc.ObjectImpl

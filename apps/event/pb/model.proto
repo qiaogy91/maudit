@@ -14,15 +14,17 @@ message Event {
     // @gotags: validate:"required"
     string source = 4;
     // @gotags: validate:"required"
-    string agent = 5;
+    string location = 5;
     // @gotags: validate:"required"
-    string service = 6;
+    string agent = 6;
     // @gotags: validate:"required"
-    string resource = 7;
+    string service = 7;
     // @gotags: validate:"required"
-    string action = 8;
+    string resource = 8;
     // @gotags: validate:"required"
-    int64 response_code = 9;
+    string action = 9;
+    // @gotags: validate:"required"
+    int64 response_code = 10;
 }
 
 message EventSet {
