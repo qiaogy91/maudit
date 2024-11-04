@@ -7,6 +7,7 @@ import "apps/event/pb/model.proto";
 option go_package = "github.com/qiaogy91/maudit/apps/event";
 
 service Rpc {
+    // 对Event 表进行操作
     rpc CreateEvent (Event) returns (Event);
     rpc QueryEvent (QueryEventRequest) returns (EventSet);
 }

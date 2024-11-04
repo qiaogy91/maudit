@@ -18,7 +18,7 @@
 ### 使用方式
 - 配置说明
 ```yaml
-# kafka 服务器地址、账号信息
+# bridge 服务器地址、账号信息
 kafka:
   username: "adminscram"
   password: "admin-secret-512"
@@ -32,7 +32,7 @@ mauditProducer:
 - 加载审计中间件
 ```go
 import (
-    _ "github.com/qiaogy91/maudit/provider/producer"
+    _ "github.com/qiaogy91/maudit/impl/producer"
 )
 ```
 - 指定资源元数据

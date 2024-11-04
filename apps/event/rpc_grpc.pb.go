@@ -23,10 +23,11 @@ const (
 	Rpc_QueryEvent_FullMethodName  = "/maudit.event.Rpc/QueryEvent"
 )
 
-// RpcClient is the producer API for Rpc service.
+// RpcClient is the client API for Rpc service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RpcClient interface {
+	// 对Event 表进行操作
 	CreateEvent(ctx context.Context, in *Event, opts ...grpc.CallOption) (*Event, error)
 	QueryEvent(ctx context.Context, in *QueryEventRequest, opts ...grpc.CallOption) (*EventSet, error)
 }
@@ -61,6 +62,7 @@ func (c *rpcClient) QueryEvent(ctx context.Context, in *QueryEventRequest, opts 
 // All implementations must embed UnimplementedRpcServer
 // for forward compatibility
 type RpcServer interface {
+	// 对Event 表进行操作
 	CreateEvent(context.Context, *Event) (*Event, error)
 	QueryEvent(context.Context, *QueryEventRequest) (*EventSet, error)
 	mustEmbedUnimplementedRpcServer()

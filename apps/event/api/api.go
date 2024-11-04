@@ -20,7 +20,7 @@ func (h *Handler) Priority() int { return 499 }
 
 func (h *Handler) Init() {
 	h.log = log.Sub(event.AppName)
-	h.svc = event.Get()
+	h.svc = event.GetSvc()
 
 	ws := gorestful.ModuleWebservice(h)
 	ws.Route(ws.GET("").

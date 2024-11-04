@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package maudit.bridge;
+
+import "apps/event/pb/model.proto";
+
+
+option go_package = "github.com/qiaogy91/maudit/apps/bridge";
+
+
+service Rpc {
+    rpc Write (event.Event) returns (WriteResponse);
+    rpc Read (ReadRequest) returns (event.Event);
+}
+
+
+message WriteResponse {}
+message ReadRequest {}

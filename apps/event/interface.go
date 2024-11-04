@@ -7,7 +7,7 @@ import (
 
 const AppName = "event"
 
-func Get() Service { return ioc.Controller().Get(AppName).(Service) }
+func GetSvc() Service { return ioc.Controller().Get(AppName).(Service) }
 
 type Service interface {
 	RpcServer
