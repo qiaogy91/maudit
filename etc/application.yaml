@@ -17,10 +17,10 @@ grpc:
   host: "0.0.0.0"
   port: 18081
 
-otlp:
-  httpEndpoint: "10.54.44.78:4318"
-  grpcEndpoint: "10.54.44.78:4317"
-  enableTLS: false
+#otlp:
+#  httpEndpoint: "10.54.44.78:4318"
+#  grpcEndpoint: "10.54.44.78:4317"
+#  enableTLS: false
 
 kafka:
   username: "adminscram"
@@ -30,7 +30,7 @@ kafka:
   batchTimeout: 10
 
 datasource:
-  otlp: true
+  otlp: false
   host: "127.0.0.1"
   port: 3306
   database: "CloudManager"
