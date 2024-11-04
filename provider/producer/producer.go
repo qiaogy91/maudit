@@ -29,10 +29,16 @@ func (i *Impl) Filter() restful.FilterFunction {
 					location = "Unknown"
 				}
 
-				tk := r.Attribute("token").(*token.Token)
+				// 获取用户信息
+				username := "Anonymous"
+				tk := r.Attribute("token")
+				if tk != nil {
+					username = tk.(*token.Token).Username
+				}
+				// 构建消息
 				msg := &event.Event{
 					Time:         time.Now().Unix(),
-					User:         tk.Username,
+					User:         username,
 					Source:       r.Request.RemoteAddr,
 					Location:     location,
 					Agent:        r.Request.UserAgent(),
