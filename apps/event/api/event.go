@@ -9,13 +9,13 @@ import (
 func (h *Handler) QueryEvents(r *restful.Request, w *restful.Response) {
 	req := event.NewQueryEventRequest()
 	if err := utils.Decoder.Decode(req, r.Request.URL.Query()); err != nil {
-		utils.SendFailed(w, err)
+		utils.SendFailed(w, ErrEventDecode(err))
 		return
 	}
 
 	ins, err := h.svc.QueryEvent(r.Request.Context(), req)
 	if err != nil {
-		utils.SendFailed(w, err)
+		utils.SendFailed(w, ErrEventQuery(err))
 		return
 	}
 	utils.SendSuccess(w, ins)

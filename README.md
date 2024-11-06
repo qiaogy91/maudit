@@ -81,7 +81,7 @@ mauditClient:
 - 加载审计中间件
 ```go
 import (
-    _ "github.com/qiaogy91/maudit/provider/middleware"
+    _ "github.com/qiaogy91/maudit/provider/authentication"
 )
 ```
 - 指定路由元数据

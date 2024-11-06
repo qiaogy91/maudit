@@ -14,18 +14,18 @@ func (i *Impl) CreateTable(ctx context.Context) error {
 func (i *Impl) CreateEvent(ctx context.Context, req *event.Event) (*event.Event, error) {
 	if err := validator.New().Struct(req); err != nil {
 		fmt.Printf("%+v\n", err)
-		return nil, event.ErrEventValidate(err)
+		return nil, err
 	}
 
 	if err := i.db.WithContext(ctx).Model(&event.Event{}).Create(req).Error; err != nil {
-		return nil, event.ErrEventCreate(err)
+		return nil, err
 	}
 	return req, nil
 }
 
 func (i *Impl) QueryEvent(ctx context.Context, req *event.QueryEventRequest) (*event.EventSet, error) {
 	if err := validator.New().Struct(req); err != nil {
-		return nil, event.ErrEventValidate(err)
+		return nil, err
 	}
 
 	inst := event.NewEventSet()
@@ -42,7 +42,7 @@ func (i *Impl) QueryEvent(ctx context.Context, req *event.QueryEventRequest) (*e
 	}
 
 	if err := sql.Count(&inst.Total).Offset(offset).Limit(limit).Find(&inst.Items).Error; err != nil {
-		return nil, event.ErrQueryEvent(err)
+		return nil, err
 	}
 
 	return inst, nil
