@@ -7,9 +7,9 @@ import (
 )
 
 func (h *Handler) QueryEvents(r *restful.Request, w *restful.Response) {
-	req := event.NewQueryEventRequest()
+	req := &event.QueryEventRequest{}
 	if err := utils.Decoder.Decode(req, r.Request.URL.Query()); err != nil {
-		utils.SendFailed(w, ErrEventDecode(err))
+		utils.SendFailed(w, ErrEventQueryParams(err))
 		return
 	}
 

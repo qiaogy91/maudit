@@ -2,7 +2,6 @@ package impl
 
 import (
 	"context"
-	"fmt"
 	"github.com/go-playground/validator/v10"
 	"github.com/qiaogy91/maudit/apps/event"
 )
@@ -13,7 +12,6 @@ func (i *Impl) CreateTable(ctx context.Context) error {
 
 func (i *Impl) CreateEvent(ctx context.Context, req *event.Event) (*event.Event, error) {
 	if err := validator.New().Struct(req); err != nil {
-		fmt.Printf("%+v\n", err)
 		return nil, err
 	}
 

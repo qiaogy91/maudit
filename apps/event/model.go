@@ -9,12 +9,3 @@ func NewEventSet() *EventSet {
 		Items: []*Event{},
 	}
 }
-
-func NewQueryEventRequest() *QueryEventRequest {
-	return &QueryEventRequest{
-		PageNum:   0,
-		PageSize:  0,
-		QueryType: 0,
-		Keyword:   "",
-	}
-}

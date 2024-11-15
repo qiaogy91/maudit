@@ -3,6 +3,7 @@ package impl
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"github.com/qiaogy91/maudit/apps/bridge"
 	"github.com/qiaogy91/maudit/apps/event"
 	"github.com/segmentio/kafka-go"
@@ -44,7 +45,7 @@ func (i *Impl) Read(ctx context.Context, request *bridge.ReadRequest) (*event.Ev
 			i.log.Error("unmarshal message err,", slog.Any("err", err))
 			time.Sleep(time.Duration(i.Duration) * time.Second)
 		}
-
+		fmt.Printf("@@@@@@@@ %+v\n", e)
 		// 写入mysql
 		if _, err := i.s.CreateEvent(ctx, e); err != nil {
 			i.log.Error("insert message err,", slog.Any("err", err))

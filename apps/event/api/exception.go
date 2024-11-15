@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-func ErrEventDecode(e error) *utils.ApiException {
+func ErrEventQueryParams(e error) *utils.ApiException {
 	return utils.NewApiException(http.StatusBadRequest, 10001, "Event请求参数错误", e)
 }
 

@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"github.com/emicklei/go-restful/v3"
+	"github.com/qiaogy91/ioc/labels"
 	"github.com/qiaogy91/maudit/apps/event"
 	"github.com/qiaogy91/mcenter/apps/token"
 	"log/slog"
@@ -19,7 +20,7 @@ func (i *Impl) Filter() restful.FilterFunction {
 		}
 
 		m := NewMeta(sr.Metadata())
-		if m.Bool("audit") {
+		if m.Bool(labels.AuditEnabled) {
 			defer func() {
 				addr := strings.Split(r.Request.RemoteAddr, ":")
 				location, err := i.s.SearchByStr(addr[0])
@@ -29,7 +30,7 @@ func (i *Impl) Filter() restful.FilterFunction {
 
 				// 获取用户信息
 				username := "Anonymous"
-				tk := r.Attribute("token")
+				tk := r.Attribute(labels.ContextTokenKey)
 				if tk != nil {
 					username = tk.(*token.Token).Username
 				}
@@ -41,8 +42,8 @@ func (i *Impl) Filter() restful.FilterFunction {
 					Location:     location,
 					Agent:        r.Request.UserAgent(),
 					Service:      i.appName,
-					Resource:     m.String("resource"),
-					Action:       m.String("action"),
+					Resource:     m.String(labels.Resource),
+					Action:       m.String(labels.Action),
 					ResponseCode: int64(w.StatusCode()),
 				}
 
